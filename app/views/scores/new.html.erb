@@ -1,0 +1,32 @@
+<div class="lab_editing">
+    <h3>Оценка</h3>
+
+    <%= form_for :scores, url: scores_path, :html => { } do |f| %>
+        <div> Лаба </div>
+        <%= f.text_field :lab, :readonly => 'true', :value => @lab.number %>
+
+        <div> Студент </div>
+        <%= f.text_field :student, :id => 'name', :value => @student.id, :style => 'display: none' %>
+        <%= f.text_field :student_fio, :id => 'name', :value => @student.short_fio,  :readOnly => 'true' %>
+
+        <div> Оценка </div>
+        <%= f.text_field :score, :id => 'themes', :value => @score == nil ? '' : @score.score %>
+
+        <div> Комментарий </div>
+        <%= f.text_area :comment, :value => @score == nil ? '' : @score.comment %>
+
+        <div> Обоснование </div>
+        <%= f.text_area :justification, :value => @score == nil ? '' : @score.justification %>
+
+        <div> 
+            Дата защиты
+            <div style="color: red">*</div>    
+        </div>
+        <%= f.text_field :date, :type => 'date', :id => 'date', value: @score == nil ? '' : @score.date %>
+
+        <div class="form_buttons_container">
+            <%= submit_tag 'Отмена', :class => 'default_button' %>
+            <%= submit_tag @score == nil ? 'Готово' : 'Обновить', :class => 'default_button' %>
+        </div>
+    <% end %>
+</div>

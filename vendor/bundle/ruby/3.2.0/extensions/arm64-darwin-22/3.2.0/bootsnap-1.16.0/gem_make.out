@@ -1,0 +1,18 @@
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+/Users/deltanull/.rvm/rubies/ruby-3.2.0/bin/ruby -I /Users/deltanull/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-ecax9j sitelibdir\=./.gem.20230509-55340-ecax9j clean
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-ecax9j sitelibdir\=./.gem.20230509-55340-ecax9j
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-ecax9j sitelibdir\=./.gem.20230509-55340-ecax9j install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 bootsnap.bundle ./.gem.20230509-55340-ecax9j/bootsnap
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-ecax9j sitelibdir\=./.gem.20230509-55340-ecax9j clean

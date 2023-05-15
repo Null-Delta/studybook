@@ -1,0 +1,228 @@
+<%
+def selected_student
+    if @selected_row != nil
+        return @students[@selected_row]
+    else 
+        return nil
+    end
+end
+
+@tryes = selected_student == nil ? [] : selected_student.lab_tryes(selected_student.current_lab)
+%>
+
+<div class="main_container">
+    <div class="table_container" style='width: calc(100vw - 256pt)'>
+        <div class="table_header">
+            <h3>Оценки</h3>
+
+            <div style="width: 100%;">
+                <span class="default_button">
+                    <%= link_to '<', '/change_scores_page?page_offset=-1'%>
+                </span>
+
+                <div>
+                    <%= @selected_page + 1 %> из <%= @pages_count %>
+                </div>
+
+                <span class="default_button">
+                    <%= link_to '>', '/change_scores_page?page_offset=1'%>
+                </span>
+            </div>
+        </div>
+
+        <div style='height: calc(100vh - 64pt - 88pt - 24pt);'>
+            <table class='half_table'>
+                <thead>
+                    <tr>
+                        <td style="width: 24pt">ID</td>
+                        <td>ФИО</td>
+                        <% (0...@labs.count).each do |lab| %>
+                            <td style="width: 24pt"><%= "ЛР" + @labs[lab].number.to_s %></td>
+                        <% end %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% (0...@students.count).each do |index| %>
+                        <tr 
+                            <% if @students[index].isStartEducation %>
+                                red
+                            <% end %> 
+
+                             <% if @students[index] == selected_student %>
+                                selected
+                            <% end %> 
+
+                            onclick="onRowClicked(<%= index %>)" 
+                            id=<%= index %>
+                        >
+                        <td style="width: 24pt"><%= @students[index].id%></td>
+                        <td><%= @students[index].short_fio %></td>
+                        <% Lab.all.to_a.each do |lab| %>
+                            <td style="width: 24pt; text-align: center;">
+                                <%= @students[index].score(lab.number) %>
+                            </td>
+                        <% end %>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="control_container_half">
+            <div>
+                <span class="default_button" id='update_list'>
+                    <%= link_to "Обновить список", scores_path %>
+                </span>
+
+                <span 
+                class="default_button" 
+                <% if selected_student == nil || selected_student.git == '' || selected_student.contact == '' %>
+                    disabled
+                <% end %>
+                >
+                    <% if selected_student != nil %>
+                        <%= link_to "Добавить Оценку", new_score_path(:student => selected_student.id, :lab => selected_student.current_lab + 1) %>
+                    <% else %>
+                        <%= link_to "Добавить Оценку", '' %>
+                    <% end %>
+                </span>
+
+                <span 
+                class="default_button"
+                <% if selected_student == nil || selected_student.current_lab == 1 && selected_student.score(selected_student.current_lab) == '' %>
+                    disabled
+                <% end %>
+                >
+                    <% if selected_student != nil %>
+                        <%= link_to "Изменить последнюю оценку", new_score_path(:student => selected_student.id, :lab => selected_student.current_lab) %>
+                    <% else %>
+                        <%= link_to "Изменить последнюю оценку", '' %>
+                    <% end %>
+                </span>
+
+                <button 
+                class="default_button" 
+                <% if selected_student == nil || selected_student.current_lab == 1 && selected_student.score(selected_student.current_lab) == '' %>
+                    disabled
+                <% end %>
+                >
+                    Удалить последнюю оценку
+                </button>
+            </div>
+
+            <div>
+                <button class="default_button" disabled id="show_history" onclick="deleteLab()">
+                Посмотреть историю
+                </button>
+
+                <span 
+                class="default_button"  
+                <%if selected_student == nil || !(selected_student.git == '' || selected_student.contact == '') %>
+                    disabled
+                <%end%>
+                >
+                    <% if selected_student != nil %>
+                        <%= link_to "Изменить контакты", "/students/#{selected_student.id}/edit?editing_type=contacts" %>
+                    <% else %>
+                        <%= link_to "Изменить контакты", '' %>
+                    <% end %>
+                </span>
+
+                <span 
+                class="default_button"  
+                <%if selected_student == nil || !(selected_student.git == '' || selected_student.contact == '') %>
+                    disabled
+                <%end%>
+                >
+                    <% if selected_student != nil %>
+                        <%= link_to "Изменить гит", "/students/#{selected_student.id}/edit?editing_type=git" %>
+                    <% else %>
+                        <%= link_to "Изменить гит", '' %>
+                    <% end %>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="student_info">
+        <h3> Инфа о студенте </h3>
+        
+        <div>ФИО</div>
+
+        <input 
+            value="<%= selected_student == nil ? '' : selected_student.short_fio %>" 
+            readonly 
+            style='margin-bottom: 8pt;'
+        >
+
+        <div>Гит</div>
+        <input 
+            value="<%= selected_student == nil ? '' : selected_student.git %>" 
+            readonly 
+            style='margin-bottom: 8pt;'
+        >        
+        
+        <div>Контакт</div>
+        <input 
+            value="<%= selected_student == nil ? '' : selected_student.contact %>" 
+            readonly 
+            style='margin-bottom: 8pt;'
+        >        
+
+        <div>Текущая лаба</div>
+
+        <div style='display: flex; width: 100%'>
+            <input 
+                value="<%= 
+                selected_student == nil ? 
+                '' : 
+                "ЛР#{selected_student.current_lab.to_s}, выдана: #{Lab.find_by(number: selected_student.current_lab).date}"
+                %>
+                " 
+                readonly 
+                style='width: 70%; margin-right: 8pt'
+            >
+
+            <span 
+            class="default_button" 
+            style='height: 25pt; width: 20%'
+            <% if selected_student == nil %>
+                disabled
+            <%end%>
+            >
+                <% if selected_student == nil %>
+                    <a href="/labs/1/edit?mode='view'">Инфо</a>
+                <% else %>
+                    <a href="/labs/<%= selected_student.current_lab %>/edit?mode=view">Инфо</a>
+                <% end %>
+            </span>
+        </div>
+
+        <div>Попытки сдачи</div>
+
+        <% if selected_student != nil %>
+            <% if @tryes.count != 0 %>
+                <% @tryes.each do |x| %>
+                    <div style='display: flex; width: 100%'>
+                        <input 
+                            value="<%= "#{x.date}, оценка: #{x.score}" %>" 
+                            readonly 
+                            style='width: 70%; margin-right: 8pt'
+                        >
+                        <button class="default_button" style='height: 25pt; width: 20%'>
+                            Инфо
+                        </button>
+                    </div>
+                <% end %>
+            <% else %>
+                <div style='font-size: 10pt'> Попыток сдачи нет </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+<script>
+    function onRowClicked(index) {
+        window.location.replace('/change_score_selection?index=' + index)
+    }
+</script>

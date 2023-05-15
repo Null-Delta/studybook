@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Studybook</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "table" %>
+    <%= stylesheet_link_tag "buttons" %>
+    <%= stylesheet_link_tag "form" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div class="header_container">
+      <div class="header_title">
+        Рельсы рельсы, шпалы шпалы...
+      </div>
+
+      <div style="width: 100%"></div>
+
+      <a class="header_button" href='/students'>
+        Студенты
+      </a>
+
+      <a class="header_button" href='/labs'>
+        Лабы
+      </a>
+
+      <a class="header_button" href='/scores'>
+        Оценки
+      </a>
+    </div>
+    <%= yield %>
+  </body>
+</html>

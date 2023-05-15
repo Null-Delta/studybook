@@ -1,0 +1,107 @@
+<div class="lab_editing">
+    <h3>Добавление студента</h3>
+
+    <%= form_for :students, url: students_path, :html => {
+        
+    } do |f| %>
+        <div> 
+            Фамилия 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :lastname, :id => 'lastname', :oninput => 'formValidate()' %>
+
+        <div> 
+            Имя 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :firstname, :id => 'firstname', :oninput => 'formValidate()' %>
+
+        <div> 
+            Отчество 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :patronymic, :id => 'patronymic', :oninput => 'formValidate()' %>
+
+        <div> Гит </div>
+        <%= f.text_field :git, :id => 'git', :oninput => 'formValidate()' %>
+
+        <div> Телефон </div>
+        <%= f.text_field :phone, :id => 'phone', :oninput => 'formValidate()' %>
+
+        <div> Почта </div>
+        <%= f.text_field :email, :id => 'email', :oninput => 'formValidate()' %>
+
+        <div> Телеграм </div>
+        <%= f.text_field :telegram, :id => 'telegram', :oninput => 'formValidate()' %>
+
+        <div class="error_msg" id="error" style="display:none;">
+            tipa error
+        </div>
+
+        <div class="form_buttons_container">
+            <%= submit_tag 'Отмена', :class => 'default_button' %>
+            <%= submit_tag 'Готово', :class => 'default_button', :id => 'done_button', :disabled => 'true' %>
+        </div>
+    <% end %>
+
+    <script data-turbolinks="false">
+        function formValidate() {
+            if (
+                document.getElementById('firstname').value == '' ||
+                document.getElementById('lastname').value == '' ||
+                document.getElementById('patronymic').value == ''
+            ) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+                return
+            }
+
+            if (
+                document.getElementById('phone').value == '' &&
+                document.getElementById('email').value == '' &&
+                document.getElementById('telegram').value == ''                
+            ) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Необходимо указать хотя бы один контакт`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+
+            if (document.getElementById('git').value != "" && document.getElementById('git').value.match(/@\w*/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введен гит`
+                document.getElementById('error').style.display = "flex"
+
+                return
+            }
+
+            if (document.getElementById('email').value != "" && document.getElementById('email').value.match(/\w*@\w*.\w{2,3}/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введена почта`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+
+            if (document.getElementById('phone').value != "" && document.getElementById('phone').value.match(/\d-\d{3}-\d{3}-\d{2}-\d{2}/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введен номер телефона`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+
+            if (document.getElementById('telegram').value != "" && document.getElementById('telegram').value.match(/@\w*/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введена телега`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+            
+            document.getElementById('error').style.display = "none"
+            document.getElementById('done_button').removeAttribute('disabled')
+        }
+    </script>
+</div>

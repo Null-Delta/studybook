@@ -1,0 +1,110 @@
+<%
+    def lab_index() 
+        if @last_lab != nil
+            return @last_lab.number + 1
+        else
+            return 1
+        end
+    end
+
+    def min_date()
+        if @last_lab != nil
+            return @last_lab.date.to_s
+        else
+            return ''
+        end
+    end
+
+    def max_date()
+        if @next_lab != nil
+            return @next_lab.date.to_s
+        else
+            return ''
+        end
+    end
+%>
+<div class="lab_editing">
+    <% if @lab == nil %>
+        <h3>Добавление лабы</h3>
+    <% else %>
+        <h3>Изменение лабы</h3>
+    <% end %>
+
+    <%= form_for :labs, url: {:action => :update}, :method => :patch, :html => {
+        
+    } do |f| %>
+        <div> Номер </div>
+        <%= f.text_field :number, :readonly => 'true', :value => @lab.number %>
+
+        <div> 
+            Название 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :name, :id => 'name', :oninput => 'formValidate()', :value => @lab.name %>
+
+        <div> Темы </div>
+        <%= f.text_area :themes, :id => 'themes', :value => @lab.themes %>
+
+        <div> Перечень задач </div>
+        <%= f.text_area :tasks, :id => 'tasks', :value => @lab.tasks %>
+
+        <div> 
+            Дата выдачи
+            <div style="color: red">*</div>    
+        </div>
+        <%= f.text_field :date, :type => 'date', :id => 'date', :oninput => 'formValidate()', :value => @lab.date %>
+
+        <div class="error_msg" id="error" style="display:none;">
+            tipa error
+        </div>
+
+        <div class="form_buttons_container">
+            <%= submit_tag 'Отмена', :class => 'default_button' %>
+            <%= submit_tag 'Готово', :class => 'default_button', :id => 'done_button' %>
+        </div>
+    <% end %>
+
+    <script>
+        var min_date = new Date("<%= min_date() %>")
+        var max_date = new Date("<%= max_date() %>")
+
+        document.getElementById('name').readOnly = <%= !@strategy.isFieldEditable('name')%>
+        document.getElementById('tasks').readOnly = <%= !@strategy.isFieldEditable('tasks')%>
+        document.getElementById('themes').readOnly = <%= !@strategy.isFieldEditable('themes')%>
+        document.getElementById('date').readOnly = <%= !@strategy.isFieldEditable('date')%>
+
+        function formValidate() {
+            if (document.getElementById('name').value != "" && document.getElementById('date').value != "") {
+                let date = new Date(document.getElementById('date').value)
+
+                if (date < min_date) {
+                    const day = min_date.getDate();
+                    const month = min_date.getMonth() + 1;
+                    const year = min_date.getFullYear();
+
+                    document.getElementById('error').style.display = "flex"
+                    document.getElementById('error').textContent = `Нельзя выдать лабу раньше предыдущей (${day}.${month}.${year})`
+
+                    document.getElementById('done_button').setAttribute('disabled', true)
+                } else if (date > max_date) {
+                
+                    const day = max_date.getDate();
+                    const month = max_date.getMonth() + 1;
+                    const year = max_date.getFullYear();
+
+                    document.getElementById('error').style.display = "flex"
+                    document.getElementById('error').textContent = `Нельзя выдать лабу позже следующей (${day}.${month}.${year})`
+
+                    document.getElementById('done_button').setAttribute('disabled', true)
+
+                } else {
+                    document.getElementById('error').style.display = "none"
+                    document.getElementById('done_button').removeAttribute('disabled')
+                }
+            } else {
+                document.getElementById('done_button').setAttribute('disabled', true)
+            }
+        }
+
+    </script>
+</div>

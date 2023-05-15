@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --main-color:rgb(101, 126, 154);
+    --main-color-light:rgb(116, 181, 209);
+    --border-color:rgb(213, 225, 233);
+    --highlight-color:rgb(226, 244, 255);
+
+    --background-color: rgb(255, 255, 255);
+    --background-accent-color:rgb(246, 249, 251);
+    --background-accent-dark-color:rgb(232, 238, 244);
+
+    --text-color: rgb(0, 0, 0);
+    --text-color-light: rgba(62, 93, 141, 0.5);
+
+    --selection-color: rgb(213, 232, 222);
+
+    --header-height: 42pt;
+
+    --border-radius: 6pt;
+}
+
+* {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--background-accent-color);
+}
+
+.header_container {
+    margin: 0pt;
+    padding: 0pt;
+    padding-left: 16pt;
+    padding-right: 16pt;
+    height: var(--header-height);
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    border: none;
+    border-bottom: solid 1pt;
+    border-color: var(--border-color);
+    background-color: var(--background-color);
+}
+
+.header_title {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    white-space: nowrap;
+    clear: both;
+    align-items: center;
+    font-size: 15pt;
+    font-weight: 800;
+    color: var(--text-color)
+}
+
+.header_button {
+    padding-left: 8pt;
+    padding-right: 8pt;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 11pt;
+    text-decoration-line: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    height: 24pt;
+    margin-left: 8pt;
+    border: none;
+    background-color: var(--background-color);
+}
+
+.header_button:hover{
+    color: var(--text-color-light);
+}
+
+.main_container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - var(--header-height) - 1pt);
+}
+
+.control_container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 8pt;
+    width: 164pt;
+    height: 100%;
+    border: none;
+    background-color: var(--background-accent-color);
+    border-color: var(--border-color);
+}
+
+h3 {
+    margin: 0pt;
+    height: 18pt;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+.table_container {
+
+    background-color: var(--background-accent-color);
+    width: 100%;
+    height: 100%;
+}
+
+.control_container > .default_button {
+    margin-bottom: 8pt;
+    height: 32pt;
+}
+
+.table_header {
+    padding-left: 16pt;
+    padding-right: 16pt;    
+    height: 42pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.table_header > * > .default_button {
+    height: 24pt;
+    width: 24pt;
+    border-radius: var(--border-radius);
+}
+
+.table_header > * {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    vertical-align: middle;
+}
+
+.table_header > * > div {
+    margin-left:  12pt;
+    margin-right: 12pt;
+}
+
+.control_container > h3 {
+    padding-top: 12pt;
+    padding-bottom: 12pt;
+}
+
+.page_info {
+    padding-left: 8pt;
+    padding-right: 8pt;
+    overflow: hidden;
+    white-space: nowrap;
+    clear: both;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+}
+
+
+.control_container_half {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    width: 100%;
+    padding-right: 8pt;
+    height: 88pt;
+}
+
+.control_container_half > * {
+    height: 32pt;
+    margin-left: 8pt;
+    display: flex;
+}
+
+.control_container_half > *:first-child {
+    margin-top: 8pt;
+    margin-bottom: 8pt;
+}
+
+.control_container_half > * > * {
+    height: 32pt;
+    padding-left: 8pt;
+    padding-right: 8pt;
+    margin-right: 8pt;
+}
+
+.student_info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding-right: 16pt;
+    padding-left: 16pt;
+}
+
+
+.student_info > h3 {
+    padding-top: 12pt;
+    padding-bottom: 12pt;
+}
+
+.student_info > *:not(h3) {
+    margin-bottom: 8pt;
+    width: 100%;
+}
+
+.student_info > input {
+    max-width: none;
+    min-width: none;
+    width: calc(100% - 16pt);
+}

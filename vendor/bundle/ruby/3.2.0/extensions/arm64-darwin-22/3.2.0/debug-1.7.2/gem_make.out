@@ -1,0 +1,19 @@
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/debug-1.7.2/ext/debug
+/Users/deltanull/.rvm/rubies/ruby-3.2.0/bin/ruby -I /Users/deltanull/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/debug-1.7.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-r3om94 sitelibdir\=./.gem.20230509-55340-r3om94 clean
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/debug-1.7.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-r3om94 sitelibdir\=./.gem.20230509-55340-r3om94
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/debug-1.7.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-r3om94 sitelibdir\=./.gem.20230509-55340-r3om94 install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 debug.bundle ./.gem.20230509-55340-r3om94/debug
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/debug-1.7.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-r3om94 sitelibdir\=./.gem.20230509-55340-r3om94 clean

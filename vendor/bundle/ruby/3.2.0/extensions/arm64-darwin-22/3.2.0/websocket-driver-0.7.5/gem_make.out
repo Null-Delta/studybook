@@ -1,0 +1,18 @@
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+/Users/deltanull/.rvm/rubies/ruby-3.2.0/bin/ruby -I /Users/deltanull/.rvm/rubies/ruby-3.2.0/lib/ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-pir8xv sitelibdir\=./.gem.20230509-55340-pir8xv clean
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-pir8xv sitelibdir\=./.gem.20230509-55340-pir8xv
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-pir8xv sitelibdir\=./.gem.20230509-55340-pir8xv install
+/opt/homebrew/opt/coreutils/bin/ginstall -c -m 0755 websocket_mask.bundle ./.gem.20230509-55340-pir8xv
+
+current directory: /Users/deltanull/Documents/GitHub/ruby_learning/lab7/studybook/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20230509-55340-pir8xv sitelibdir\=./.gem.20230509-55340-pir8xv clean

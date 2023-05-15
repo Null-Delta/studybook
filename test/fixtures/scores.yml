@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lab: 1
+  student: 1
+  score: MyString
+  date: 2023-05-13
+  comment: MyText
+  justification: MyText
+
+two:
+  lab: 1
+  student: 1
+  score: MyString
+  date: 2023-05-13
+  comment: MyText
+  justification: MyText

@@ -1,0 +1,116 @@
+<div class="lab_editing">
+    <h3>Изменение студента</h3>
+
+    <%= form_for :students, url: {:action => :update}, :method => :patch, :html => {
+        
+    } do |f| %>
+        <div> 
+            Фамилия 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :lastname, :id => 'lastname', :oninput => 'formValidate()', :value => @student.lastname %>
+
+        <div> 
+            Имя 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :firstname, :id => 'firstname', :oninput => 'formValidate()', :value => @student.firstname %>
+
+        <div> 
+            Отчество 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :patronymic, :id => 'patronymic', :oninput => 'formValidate()', :value => @student.patronymic %>
+
+        <div> Гит </div>
+        <%= f.text_field :git, :id => 'git', :oninput => 'formValidate()', :value => @student.git %>
+
+        <div> Телефон </div>
+        <%= f.text_field :phone, :id => 'phone', :oninput => 'formValidate()', :value => @student.phone %>
+
+        <div> Почта </div>
+        <%= f.text_field :email, :id => 'email', :oninput => 'formValidate()', :value => @student.email %>
+
+        <div> Телеграм </div>
+        <%= f.text_field :telegram, :id => 'telegram', :oninput => 'formValidate()', :value => @student.telegram %>
+
+        <div class="error_msg" id="error" style="display:none;">
+            tipa error
+        </div>
+
+        <div class="form_buttons_container">
+            <%= submit_tag 'Отмена', :class => 'default_button' %>
+            <%= submit_tag 'Готово', :class => 'default_button', :id => 'done_button' %>
+        </div>
+    <% end %>
+
+    <script data-turbolinks="false">
+
+        document.getElementById('firstname').readOnly = <%= !@editing_strategy.isFieldEditable('firstname') %>
+        document.getElementById('lastname').readOnly = <%= !@editing_strategy.isFieldEditable('lastname') %>
+        document.getElementById('patronymic').readOnly = <%= !@editing_strategy.isFieldEditable('patronymic') %>
+        document.getElementById('git').readOnly = <%= !@editing_strategy.isFieldEditable('git') %>
+        document.getElementById('phone').readOnly = <%= !@editing_strategy.isFieldEditable('phone') %>
+        document.getElementById('email').readOnly = <%= !@editing_strategy.isFieldEditable('email') %>
+        document.getElementById('telegram').readOnly = <%= !@editing_strategy.isFieldEditable('telegram') %>
+
+        function formValidate() {
+            if (
+                document.getElementById('firstname').value == '' ||
+                document.getElementById('lastname').value == '' ||
+                document.getElementById('patronymic').value == ''
+            ) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+                return
+            }
+
+            if (
+                document.getElementById('phone').value == '' &&
+                document.getElementById('email').value == '' &&
+                document.getElementById('telegram').value == ''                
+            ) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Необходимо указать хотя бы один контакт`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+
+            if (document.getElementById('git').value != "" && document.getElementById('git').value.match(/@\w*/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введен гит`
+                document.getElementById('error').style.display = "flex"
+
+                return
+            }
+
+            if (document.getElementById('email').value != "" && document.getElementById('email').value.match(/\w*@\w*.\w{2,3}/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введена почта`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+
+            if (document.getElementById('phone').value != "" && document.getElementById('phone').value.match(/\d-\d{3}-\d{3}-\d{2}-\d{2}/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введен номер телефона`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+
+            if (document.getElementById('telegram').value != "" && document.getElementById('telegram').value.match(/@\w*/) == null) {
+                document.getElementById('done_button').setAttribute('disabled', true)
+
+                document.getElementById('error').textContent = `Неверно введена телега`
+                document.getElementById('error').style.display = "flex"
+                return
+            }
+            
+            document.getElementById('error').style.display = "none"
+            document.getElementById('done_button').removeAttribute('disabled')
+        }
+    </script>
+</div>

@@ -1,0 +1,166 @@
+
+table {
+    border-spacing: 0pt;
+    width: calc(100vw - 164pt - 48pt);
+    margin-left: 16pt;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    border: solid 1pt;
+    border-color: var(--border-color);
+    box-shadow: 0pt 0pt 6pt 6pt rgba(217, 217, 217, 0.1);
+
+    overflow:scroll;
+    display:block;
+    height: max-content;
+}
+
+
+.half_table {
+    border-spacing: 0pt;
+    width: calc(100vw - 256pt - 48pt - 16pt);
+    margin-left: 16pt;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    border: solid 1pt;
+    border-color: var(--border-color);
+    box-shadow: 0pt 0pt 6pt 6pt rgba(217, 217, 217, 0.1);
+
+    overflow:scroll;
+    display:block;
+    height: max-content;
+}
+
+thead,tbody,tr {
+    table-layout:fixed;
+    width: 100%;
+}
+
+tr {
+    display:table;
+}
+
+tbody {
+    height: fit-content;
+    max-height: calc(100vh - 134pt);
+} 
+
+
+.half_table > tbody {
+    height: fit-content;
+    max-height: calc(100vh - 134pt - 64pt);
+} 
+
+tr {
+    height: 32pt;
+    background-color: transparent;
+    margin: 0pt;
+    padding: 0pt;
+    border: none;
+    border-color: transparent;
+}
+
+thead > tr {
+    border-radius: 0pt;
+}
+
+thead > tr > td:last-child {
+    border-radius: 0pt 5pt 0pt 0pt;
+}
+
+thead > tr > td:first-child {
+    border-radius: 5pt 0pt 0pt 0pt;
+}
+
+thead > tr > td {
+    background-color: var(--background-accent-color);
+    border: none;
+    font-weight: 700;
+    border-color: var(--border-color);
+}
+
+tr > td {
+    border: none;
+    padding: 0pt;
+    text-align: left;
+    padding-left: 8pt;
+    padding-right: 8pt;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+tbody > tr > td {
+    border-top: solid 1pt;
+    border-color: var(--border-color);
+}
+
+tbody > tr:last-child > td {
+    border-right: dashed 1pt;
+    border-color: var(--border-color);
+}
+
+tbody > tr > td:not(:last-child) {
+    border-right: dashed 1pt;
+    border-color: var(--border-color);
+}
+
+tbody > tr:last-child > td:last-child {
+    border-right: none;
+    border-color: var(--border-color);
+}
+
+tbody > tr:hover > td {
+    background-color: var(--background-accent-color);
+}
+
+tbody > tr:active > td {
+    background-color: var(--background-accent-dark-color);
+}
+
+tbody > tr[selected] > td {
+    background-color: var(--main-color);
+    color: white;
+    border-color: white;
+}
+
+tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 5pt;
+}
+
+tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius: 5pt;
+}
+
+
+.table_container {
+    width: calc(100vw - 164pt - 16pt);
+}
+
+tbody > tr[red] > td {
+    background-color: rgb(253, 202, 202);
+    border-color: rgb(238, 157, 157);
+    color: rgb(138, 47, 47);
+}
+
+tbody > tr:last-child[red] > td {
+    background-color: rgb(253, 202, 202);
+    border-color: rgb(238, 157, 157);
+    color: rgb(138, 47, 47);
+}
+
+tbody > tr:hover[red] > td {
+    background-color: rgb(245, 189, 189);
+}
+
+tbody > tr:active[red] > td {
+    background-color: rgb(240, 175, 175);
+}
+
+
+tbody > tr[selected][red] > td {
+    background-color: rgb(187, 105, 105);
+    color: white;
+    border-color: rgb(240, 175, 175);
+}

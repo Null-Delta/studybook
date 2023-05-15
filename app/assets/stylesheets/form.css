@@ -1,0 +1,111 @@
+:root {
+    --form-width: 320pt;
+}
+
+.lab_editing {
+    margin: 16pt;
+    display: flex;
+    width: var(--form-width);
+    flex-direction: column;
+}
+
+input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    border-radius: 6pt;
+    height: 24pt;
+    border-width: 1pt;
+    border-color: var(--border-color);
+    background-color: var(--background-color);
+    padding: 0pt;
+    padding-left: 8pt;
+    padding-right: 8pt;
+    outline: none;
+    border-style: solid;
+}
+
+.lab_editing > * > input {
+    width: calc(var(--form-width) - 17pt);
+}
+
+.lab_editing > * > textarea {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    border-radius: 6pt;
+    height: 24pt;
+    border-width: 1pt;
+    border-color: var(--border-color);
+    background-color: var(--background-color);
+    padding: 8pt;
+    outline: none;
+    max-width: calc(var(--form-width) - 17pt);
+    min-width: calc(var(--form-width) - 17pt);
+    border-style: solid;
+}
+
+.lab_editing > * > div:not([class="error_msg"]) {
+    height: 24pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+}
+
+.lab_editing > * > * > input[type=submit] {
+    height: 32pt;
+    width: 100%;
+}
+
+.lab_editing > * > button {
+    margin-right: 12pt;
+    height: 32pt;
+    width: 100%;
+}
+
+.form_buttons_container > input:first-child {
+    margin-right: 12pt;
+}
+
+.lab_editing > * > .form_buttons_container {
+    height: 32pt;
+    margin-top: 12pt;
+}
+
+input:disabled {
+    color: var(--text-color);
+    background-color: var(--background-accent-color);
+    border-color: var(--background-accent-dark-color);
+}
+
+input:read-only:not([class='default_button']) {
+    color: var(--text-color);
+    background-color: var(--background-accent-color);
+    border-color: var(--background-accent-dark-color);
+}
+
+input:focus {
+    border-width: 1pt;
+}
+
+.lab_editing > h3 {
+    padding-bottom: 6pt;
+}
+
+.error_msg {
+    font-size: 10pt;
+    margin-top: 12pt;
+    border-radius: 6pt;
+    background-color: rgb(253, 202, 202);
+    border: solid 1pt;
+    border-color: rgb(238, 157, 157);
+    padding: 6pt;
+    color: rgb(138, 47, 47);
+}
+
+textarea:read-only {
+    color: var(--text-color);
+    background-color: var(--background-accent-color);
+    border-color: var(--background-accent-dark-color);
+}

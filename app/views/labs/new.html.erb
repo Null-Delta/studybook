@@ -1,0 +1,84 @@
+<%
+    def lab_index() 
+        if @last_lab != nil
+            return @last_lab.number + 1
+        else
+            return 1
+        end
+    end
+
+    def min_date()
+        if @last_lab != nil
+            return @last_lab.date.to_s
+        else
+            return 'abiba'
+        end
+    end
+%>
+<div class="lab_editing">
+    <% if @lab == nil %>
+        <h3>Добавление лабы</h3>
+    <% else %>
+        <h3>Изменение лабы</h3>
+    <% end %>
+
+    <%= form_for :labs, url: labs_path, :html => {
+        
+    } do |f| %>
+        <div> Номер </div>
+        <%= f.text_field :number, :readonly => 'true', :value => lab_index() %>
+
+        <div> 
+            Название 
+            <div style="color: red">*</div>
+        </div>
+        <%= f.text_field :name, :id => 'name', :oninput => 'formValidate()' %>
+
+        <div> Темы </div>
+        <%= f.text_area :themes %>
+
+        <div> Перечень задач </div>
+        <%= f.text_area :tasks %>
+
+        <div> 
+            Дата выдачи
+            <div style="color: red">*</div>    
+        </div>
+        <%= f.text_field :date, :type => 'date', :id => 'date', :oninput => 'formValidate()' %>
+
+        <div class="error_msg" id="error" style="display:none;">
+            tipa error
+        </div>
+
+        <div class="form_buttons_container">
+            <%= submit_tag 'Отмена', :class => 'default_button' %>
+            <%= submit_tag 'Готово', :class => 'default_button', :id => 'done_button', :disabled => 'true' %>
+        </div>
+    <% end %>
+
+    <script data-turbolinks="false">
+        let min_date = new Date("<%= min_date() %>")
+        const day = min_date.getDate();
+        const month = min_date.getMonth() + 1;
+        const year = min_date.getFullYear();
+
+        document.getElementById('error').textContent = `Нельзя выдать лабу раньше последней (${day}.${month}.${year})`
+        function formValidate() {
+            if (document.getElementById('name').value != "" && document.getElementById('date').value != "") {
+                let date = new Date(document.getElementById('date').value)
+
+                
+                if (date < min_date) {
+                    document.getElementById('error').style.display = "flex"
+                    document.getElementById('done_button').setAttribute('disabled', true)
+                } else {
+                    document.getElementById('error').style.display = "none"
+                    document.getElementById('done_button').removeAttribute('disabled')
+                }
+            } else {
+                document.getElementById('done_button').setAttribute('disabled', true)
+            }
+        }
+
+    </script>
+</div>

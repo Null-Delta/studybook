@@ -1,0 +1,104 @@
+<div class="main_container">
+    <div class="table_container">
+        <div class="table_header">
+            <h3>Лабы</h3>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td style="width: 48pt">Номер</td>
+                    <td>Название</td>
+                    <td>Дата выдачи</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% (0...@labs.count).each do |ind| %>
+                    <tr onclick=<%= "onRowClicked(" + ind.to_s + ")"%> id=<%= ind %>>
+                        <td style="width: 48pt"><%= @labs.at(ind).number %></td>
+                        <td><%= @labs[ind].name %></td>
+                        <td><%= @labs[ind].date %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="control_container">
+        <h3> Действия </h3>
+
+        <span class="default_button">
+            <%= link_to "Обновить", labs_path %>
+        </span>
+
+        <span class="default_button">
+            <%= link_to "Добавить", new_lab_path %>
+        </span>
+
+        <button class="default_button" disabled id="edit_button" onclick="editLab()">
+            Изменить
+        </button>
+
+        <button class="default_button" disabled id="delete_button" onclick="deleteLab()">
+            Удалить
+        </button>
+    </div>
+</div>
+
+<script>
+    var selected_row = null
+    var labs_count = <%= @labs.count %>        
+
+    function ready() {  
+        alert('abiba')
+        selected_row = null
+        labs_count = <%= @labs.count %>
+    }
+
+    function clearSelection() {
+        for(i = 0; i < labs_count; i++) {
+        let tr = document.getElementById('' + i)
+        tr.removeAttribute("selected")
+        }
+    }
+        
+    function onRowClicked(index) {
+        clearSelection()
+        if (selected_row == index) { 
+            selected_row = null
+            document.getElementById('edit_button').setAttribute('disabled', true)
+            document.getElementById('delete_button').setAttribute('disabled', true)
+            return
+        }
+        selected_row = index
+        
+        let tr = document.getElementById('' + selected_row)
+        tr.setAttribute("selected", true)
+
+        if (selected_row == labs_count - 1) {
+            document.getElementById('delete_button').removeAttribute('disabled')
+        } else {
+            document.getElementById('delete_button').setAttribute('disabled', true)
+        }
+
+        document.getElementById('edit_button').removeAttribute('disabled')
+    }
+
+    function editLab() {
+        let selected_tr = document.getElementById('' + selected_row)
+        let id = selected_tr.children[0].textContent
+        
+        window.location.href = '/labs/' + id + '/edit/'
+    }
+
+    function deleteLab() {
+        let selected_tr = document.getElementById('' + selected_row)
+        let id = selected_tr.children[0].textContent
+        
+        var request = new XMLHttpRequest();
+        request.open( "DELETE", '/labs/' + id, false );
+        request.send( null );
+
+        window.location.href = '/labs'
+    }
+</script>
